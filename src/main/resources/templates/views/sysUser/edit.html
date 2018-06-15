@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+<title>编辑</title>
+<link th:href="@{/webjars/bootstrap/3.2.0/css/bootstrap.min.css}" rel="stylesheet" media="screen"></link>
+<link rel="stylesheet" th:href="@{/resource/plugins/position-validate/css/validationEngine.jquery.css}"/>
+<script type="text/javascript" th:src="@{/webjars/jquery/2.1.1/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/webjars/bootstrap/3.2.0/js/bootstrap.min.js}"></script>
+<script th:src="@{/resource/plugins/position-validate/js/jquery.validationEngine-zh_CN.js}"></script>
+<script th:src="@{/resource/plugins/position-validate/js/jquery.validationEngine.js}"></script>
+<script type="text/javascript" th:src="@{/resource/plugins/layer/layer.js}"></script>
+<script type="text/javascript" th:src="@{/resource/js/edit.js}"></script>
+<style type="text/css">
+html { overflow-x: hidden; overflow-y: auto; }
+</style>
+</head>
+<body>
+<div class="container-fluid" style="padding: 30px;">
+	<div class="row">
+		<form data="editForm" class="form-horizontal" id="saveObjForm">
+			<input type="hidden"  name="id" th:value="${sysUser.id}"/>
+    		<table class="table table-bordered" >
+        		<tr>
+            		<td  class="text-r" style="width: 15%">用户名称</td>
+            		<td>
+			     		<input type="text" style="width:20%" name="userName"  placeholder="请输入用户名称" th:value="${sysUser.userName}" class="form-control validate[required]"/>
+            		</td>
+        </tr>
+        		<tr>
+            		<td  class="text-r" style="width: 15%">登录名称</td>
+            		<td>
+			     		<input type="text" style="width:20%" name="loginName"  placeholder="请输入登录名称" th:value="${sysUser.loginName}" class="form-control validate[required]"/>
+            		</td>
+        </tr>
+        		<tr>
+            		<td  class="text-r" style="width: 15%">手机号码</td>
+            		<td>
+			     		<input type="text" style="width:20%" name="mobile"  placeholder="请输入手机号码" th:value="${sysUser.mobile}" class="form-control validate[required]"/>
+            		</td>
+        </tr>
+        		<tr>
+            		<td  class="text-r" style="width: 15%">加密盐</td>
+            		<td>
+			     		<input type="text" style="width:20%" name="salt"  placeholder="请输入加密盐" th:value="${sysUser.salt}" class="form-control validate[required]"/>
+            		</td>
+        </tr>
+        		<tr>
+            		<td  class="text-r" style="width: 15%">登录秘密</td>
+            		<td>
+			     		<input type="text" style="width:20%" name="password"  placeholder="请输入登录秘密" th:value="${sysUser.password}" class="form-control validate[required]"/>
+            		</td>
+        </tr>
+        		<tr>
+            		<td  class="text-r" style="width: 15%">最后登录IP</td>
+            		<td>
+			     		<input type="text" style="width:20%" name="lastLoginIp"  placeholder="请输入最后登录IP" th:value="${sysUser.lastLoginIp}" class="form-control validate[required]"/>
+            		</td>
+        </tr>
+        		<tr>
+            		<td  class="text-r" style="width: 15%">最后登录时间</td>
+            		<td>
+			     		<input type="text" style="width:20%" name="lastLoginTime"  placeholder="请输入最后登录时间" th:value="${sysUser.lastLoginTime}" class="form-control validate[required]"/>
+            		</td>
+        </tr>
+        		<tr>
+            		<td  class="text-r" style="width: 15%">创建人</td>
+            		<td>
+			     		<input type="text" style="width:20%" name="createUserId"  placeholder="请输入创建人" th:value="${sysUser.createUserId}" class="form-control validate[required]"/>
+            		</td>
+        </tr>
+        		<tr>
+            		<td  class="text-r" style="width: 15%">创建时间</td>
+            		<td>
+			     		<input type="text" style="width:20%" name="createTime"  placeholder="请输入创建时间" th:value="${sysUser.createTime}" class="form-control validate[required]"/>
+            		</td>
+        </tr>
+        		<tr>
+            		<td  class="text-r" style="width: 15%">修改人</td>
+            		<td>
+			     		<input type="text" style="width:20%" name="updateUserId"  placeholder="请输入修改人" th:value="${sysUser.updateUserId}" class="form-control validate[required]"/>
+            		</td>
+        </tr>
+        		<tr>
+            		<td  class="text-r" style="width: 15%">修改时间</td>
+            		<td>
+			     		<input type="text" style="width:20%" name="updateTime"  placeholder="请输入修改时间" th:value="${sysUser.updateTime}" class="form-control validate[required]"/>
+            		</td>
+        </tr>
+        		<tr>
+            		<td  class="text-r" style="width: 15%">删除标记</td>
+            		<td>
+			     		<input type="text" style="width:20%" name="isDelete"  placeholder="请输入删除标记" th:value="${sysUser.isDelete}" class="form-control validate[required]"/>
+            		</td>
+        </tr>
+    </table>
+   </form>
+</div>
+</div>
+</body>
+</html>

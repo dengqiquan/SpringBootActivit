@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+<title>编辑</title>
+<link th:href="@{/webjars/bootstrap/3.2.0/css/bootstrap.min.css}" rel="stylesheet" media="screen"></link>
+<link rel="stylesheet" th:href="@{/resource/plugins/position-validate/css/validationEngine.jquery.css}"/>
+<script type="text/javascript" th:src="@{/webjars/jquery/2.1.1/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/webjars/bootstrap/3.2.0/js/bootstrap.min.js}"></script>
+<script th:src="@{/resource/plugins/position-validate/js/jquery.validationEngine-zh_CN.js}"></script>
+<script th:src="@{/resource/plugins/position-validate/js/jquery.validationEngine.js}"></script>
+<script type="text/javascript" th:src="@{/resource/plugins/layer/layer.js}"></script>
+<script type="text/javascript" th:src="@{/resource/js/edit.js}"></script>
+<style type="text/css">
+html { overflow-x: hidden; overflow-y: auto; }
+</style>
+</head>
+<body>
+<div class="container-fluid" style="padding: 30px;">
+	<div class="row">
+		<form data="editForm" class="form-horizontal" id="saveObjForm">
+			<input type="hidden"  name="id" th:value="${sysPermission.id}"/>
+    		<table class="table table-bordered" >
+        		<tr>
+            		<td  class="text-r" style="width: 15%">权限名称</td>
+            		<td>
+			     		<input type="text" style="width:20%" name="name"  placeholder="请输入权限名称" th:value="${sysPermission.name}" class="form-control validate[required]"/>
+            		</td>
+        </tr>
+        		<tr>
+            		<td  class="text-r" style="width: 15%">权限值</td>
+            		<td>
+			     		<input type="text" style="width:20%" name="value"  placeholder="请输入权限值" th:value="${sysPermission.value}" class="form-control validate[required]"/>
+            		</td>
+        </tr>
+        		<tr>
+            		<td  class="text-r" style="width: 15%">URL</td>
+            		<td>
+			     		<input type="text" style="width:20%" name="href"  placeholder="请输入URL" th:value="${sysPermission.href}" class="form-control validate[required]"/>
+            		</td>
+        </tr>
+        		<tr>
+            		<td  class="text-r" style="width: 15%">父ID</td>
+            		<td>
+			     		<input type="text" style="width:20%" name="parentId"  placeholder="请输入父ID" th:value="${sysPermission.parentId}" class="form-control validate[required]"/>
+            		</td>
+        </tr>
+        		<tr>
+            		<td  class="text-r" style="width: 15%">父ID集合</td>
+            		<td>
+			     		<input type="text" style="width:20%" name="parentIds"  placeholder="请输入父ID集合" th:value="${sysPermission.parentIds}" class="form-control validate[required]"/>
+            		</td>
+        </tr>
+        		<tr>
+            		<td  class="text-r" style="width: 15%">最后一级</td>
+            		<td>
+			     		<input type="text" style="width:20%" name="isLast"  placeholder="请输入最后一级" th:value="${sysPermission.isLast}" class="form-control validate[required]"/>
+            		</td>
+        </tr>
+        		<tr>
+            		<td  class="text-r" style="width: 15%">创建人</td>
+            		<td>
+			     		<input type="text" style="width:20%" name="createUserId"  placeholder="请输入创建人" th:value="${sysPermission.createUserId}" class="form-control validate[required]"/>
+            		</td>
+        </tr>
+        		<tr>
+            		<td  class="text-r" style="width: 15%">创建时间</td>
+            		<td>
+			     		<input type="text" style="width:20%" name="createTime"  placeholder="请输入创建时间" th:value="${sysPermission.createTime}" class="form-control validate[required]"/>
+            		</td>
+        </tr>
+        		<tr>
+            		<td  class="text-r" style="width: 15%">更新人</td>
+            		<td>
+			     		<input type="text" style="width:20%" name="updateUserId"  placeholder="请输入更新人" th:value="${sysPermission.updateUserId}" class="form-control validate[required]"/>
+            		</td>
+        </tr>
+        		<tr>
+            		<td  class="text-r" style="width: 15%">更新时间</td>
+            		<td>
+			     		<input type="text" style="width:20%" name="updateTime"  placeholder="请输入更新时间" th:value="${sysPermission.updateTime}" class="form-control validate[required]"/>
+            		</td>
+        </tr>
+        		<tr>
+            		<td  class="text-r" style="width: 15%">删除标记</td>
+            		<td>
+			     		<input type="text" style="width:20%" name="isDelete"  placeholder="请输入删除标记" th:value="${sysPermission.isDelete}" class="form-control validate[required]"/>
+            		</td>
+        </tr>
+        		<tr>
+            		<td  class="text-r" style="width: 15%">层级编号</td>
+            		<td>
+			     		<input type="text" style="width:20%" name="levelCode"  placeholder="请输入层级编号" th:value="${sysPermission.levelCode}" class="form-control validate[required]"/>
+            		</td>
+        </tr>
+        		<tr>
+            		<td  class="text-r" style="width: 15%">排序编号</td>
+            		<td>
+			     		<input type="text" style="width:20%" name="orderCode"  placeholder="请输入排序编号" th:value="${sysPermission.orderCode}" class="form-control validate[required]"/>
+            		</td>
+        </tr>
+    </table>
+   </form>
+</div>
+</div>
+</body>
+</html>

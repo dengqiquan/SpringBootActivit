@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fcore.boot.domain.SysPermissionDao">
+	<resultMap id="result_SysPermissionMap" type="com.fcore.boot.entity.SysPermission">
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+	id,name,value,href,parentId,parentIds,isLast,createUserId,createTime,updateUserId,updateTime,isDelete,levelCode,orderCode
+	</sql>
+	
+    <!-- 单条新增  -->
+	<insert id="add" parameterType="com.fcore.boot.entity.SysPermission">
+		<![CDATA[
+		INSERT INTO sys_permission(id,name,value,href,parentId,parentIds,isLast,createUserId,createTime,updateUserId,updateTime,isDelete,levelCode,orderCode) 
+		VALUES 
+		(#{id},#{name},#{value},#{href},#{parentId},#{parentIds},#{isLast},#{createUserId},#{createTime},#{updateUserId},#{updateTime},#{isDelete},#{levelCode},#{orderCode})
+		]]>
+		<selectKey resultType="long" keyProperty="id">
+			select @@IDENTITY as id
+		</selectKey>
+    </insert>
+    
+     <!-- 根据id查询 -->
+	<select id="getById" parameterType="long" resultMap="result_SysPermissionMap">
+		select <include refid="Base_Column_List"/> from sys_permission where id=#{id}
+	</select>
+	
+	<!-- 分页查询列表 -->
+	<select id="getList"  resultMap="result_SysPermissionMap" parameterType="com.fcore.boot.entity.SysPermission">
+    	select <include refid="Base_Column_List"/> from sys_permission
+    	where isDelete = 1
+    	order by id desc 
+    	<if test="pageSize!=null and pageSize>0 and pageNumber!=null and pageNumber>0">
+    		limit ${(pageNumber-1)*pageSize},#{pageSize}
+    	</if>
+    </select>
+    <select id="getCount" parameterType="com.fcore.boot.entity.SysPermission" resultType="int">
+   		 select count(1) from sys_permission
+   		 where isDelete = 1
+    </select>
+
+	
+	<!-- 根据id修改记录 -->
+	<update id="update" parameterType="com.fcore.boot.entity.SysPermission">
+		update sys_permission
+		<trim prefix="set" prefixOverrides=",">
+			<if test="name != null and name != ''">
+			,name = #{name}
+			</if>
+			<if test="value != null and value != ''">
+			,value = #{value}
+			</if>
+			<if test="href != null and href != ''">
+			,href = #{href}
+			</if>
+			<if test="parentId != null and parentId >0">
+			,parentId = #{parentId}
+			</if>
+			<if test="parentIds != null and parentIds != ''">
+			,parentIds = #{parentIds}
+			</if>
+			<if test="isLast != null and isLast >0">
+			,isLast = #{isLast}
+			</if>
+			<if test="createUserId != null and createUserId >0">
+			,createUserId = #{createUserId}
+			</if>
+			<if test="createTime != null and createTime != ''">
+			,createTime = #{createTime}
+			</if>
+			<if test="updateUserId != null and updateUserId >0">
+			,updateUserId = #{updateUserId}
+			</if>
+			<if test="updateTime != null and updateTime != ''">
+			,updateTime = #{updateTime}
+			</if>
+			<if test="isDelete != null and isDelete >0">
+			,isDelete = #{isDelete}
+			</if>
+			<if test="levelCode != null and levelCode >0">
+			,levelCode = #{levelCode}
+			</if>
+			<if test="orderCode != null and orderCode >0">
+			,orderCode = #{orderCode}
+			</if>
+		</trim>
+		where id=#{id}
+	</update>
+	
+	<!-- 根据条件查询 -->
+	<select id="getByParams" resultMap="result_SysPermissionMap" parameterType="java.util.Map">
+		select <include refid="Base_Column_List"/> from sys_permission
+		<where>
+			<if test="id != null and id != '' ">
+		      and id=#{id}
+	        </if>
+			<if test="name != null and name != '' ">
+		      and name=#{name}
+	        </if>
+			<if test="value != null and value != '' ">
+		      and value=#{value}
+	        </if>
+			<if test="href != null and href != '' ">
+		      and href=#{href}
+	        </if>
+			<if test="parentId != null and parentId != '' ">
+		      and parentId=#{parentId}
+	        </if>
+			<if test="parentIds != null and parentIds != '' ">
+		      and parentIds=#{parentIds}
+	        </if>
+			<if test="isLast != null and isLast != '' ">
+		      and isLast=#{isLast}
+	        </if>
+			<if test="createUserId != null and createUserId != '' ">
+		      and createUserId=#{createUserId}
+	        </if>
+			<if test="createTime != null and createTime != '' ">
+		      and createTime=#{createTime}
+	        </if>
+			<if test="updateUserId != null and updateUserId != '' ">
+		      and updateUserId=#{updateUserId}
+	        </if>
+			<if test="updateTime != null and updateTime != '' ">
+		      and updateTime=#{updateTime}
+	        </if>
+			<if test="isDelete != null and isDelete != '' ">
+		      and isDelete=#{isDelete}
+	        </if>
+			<if test="levelCode != null and levelCode != '' ">
+		      and levelCode=#{levelCode}
+	        </if>
+			<if test="orderCode != null and orderCode != '' ">
+		      and orderCode=#{orderCode}
+	        </if>
+		</where>
+	</select>
+</mapper>

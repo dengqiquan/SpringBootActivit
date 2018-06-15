@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+<title>编辑</title>
+<link th:href="@{/webjars/bootstrap/3.2.0/css/bootstrap.min.css}" rel="stylesheet" media="screen"></link>
+<link rel="stylesheet" th:href="@{/resource/plugins/position-validate/css/validationEngine.jquery.css}"/>
+<script type="text/javascript" th:src="@{/webjars/jquery/2.1.1/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/webjars/bootstrap/3.2.0/js/bootstrap.min.js}"></script>
+<script th:src="@{/resource/plugins/position-validate/js/jquery.validationEngine-zh_CN.js}"></script>
+<script th:src="@{/resource/plugins/position-validate/js/jquery.validationEngine.js}"></script>
+<script type="text/javascript" th:src="@{/resource/plugins/layer/layer.js}"></script>
+<script type="text/javascript" th:src="@{/resource/js/edit.js}"></script>
+<style type="text/css">
+html { overflow-x: hidden; overflow-y: auto; }
+</style>
+</head>
+<body>
+<div class="container-fluid" style="padding: 30px;">
+	<div class="row">
+		<form data="editForm" class="form-horizontal" id="saveObjForm">
+			<input type="hidden"  name="sysUserId" th:value="${sysUserRole.sysUserId}"/>
+    		<table class="table table-bordered" >
+        		<tr>
+            		<td  class="text-r" style="width: 15%"></td>
+            		<td>
+			     		<input type="text" style="width:20%" name="sysRoleId"  placeholder="请输入" th:value="${sysUserRole.sysRoleId}" class="form-control validate[required]"/>
+            		</td>
+        </tr>
+    </table>
+   </form>
+</div>
+</div>
+</body>
+</html>

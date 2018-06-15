@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
+  <process id="activitiDemo" name="演示流程" isExecutable="true">
+    <startEvent id="startevent1" name="Start"></startEvent>
+    <endEvent id="endevent1" name="End"></endEvent>
+    <userTask id="task1" name="提交申请" activiti:assignee="${applyUserPhone}"></userTask>
+    <userTask id="task2" name=" 审批-部门经理" activiti:assignee="13880394348"></userTask>
+    <userTask id="task3" name="审批-总经理" activiti:assignee="13880394348"></userTask>
+    <sequenceFlow id="flow1" sourceRef="startevent1" targetRef="task1"></sequenceFlow>
+    <sequenceFlow id="flow2" sourceRef="task1" targetRef="task2"></sequenceFlow>
+    <exclusiveGateway id="exclusivegateway1" name="Exclusive Gateway"></exclusiveGateway>
+    <sequenceFlow id="flow5" sourceRef="task2" targetRef="exclusivegateway1"></sequenceFlow>
+    <sequenceFlow id="flow6" name="审核通过" sourceRef="exclusivegateway1" targetRef="task3">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${checkState==1}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow7" name="审核不通过" sourceRef="exclusivegateway1" targetRef="task1">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${checkState==2}]]></conditionExpression>
+    </sequenceFlow>
+    <exclusiveGateway id="exclusivegateway2" name="Exclusive Gateway"></exclusiveGateway>
+    <sequenceFlow id="flow8" sourceRef="task3" targetRef="exclusivegateway2"></sequenceFlow>
+    <sequenceFlow id="flow10" name="审核不通过" sourceRef="exclusivegateway2" targetRef="task1">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${checkState==2}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow9" name="审核通过" sourceRef="exclusivegateway2" targetRef="endevent1">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${checkState==1}]]></conditionExpression>
+    </sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_activitiDemo">
+    <bpmndi:BPMNPlane bpmnElement="activitiDemo" id="BPMNPlane_activitiDemo">
+      <bpmndi:BPMNShape bpmnElement="startevent1" id="BPMNShape_startevent1">
+        <omgdc:Bounds height="30.0" width="30.0" x="42.0" y="40.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endevent1" id="BPMNShape_endevent1">
+        <omgdc:Bounds height="28.0" width="28.0" x="660.0" y="225.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="task1" id="BPMNShape_task1">
+        <omgdc:Bounds height="55.0" width="105.0" x="122.0" y="30.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="task2" id="BPMNShape_task2">
+        <omgdc:Bounds height="55.0" width="105.0" x="302.0" y="30.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="task3" id="BPMNShape_task3">
+        <omgdc:Bounds height="55.0" width="105.0" x="302.0" y="210.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway1" id="BPMNShape_exclusivegateway1">
+        <omgdc:Bounds height="40.0" width="40.0" x="334.0" y="122.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway2" id="BPMNShape_exclusivegateway2">
+        <omgdc:Bounds height="40.0" width="40.0" x="480.0" y="217.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow1" id="BPMNEdge_flow1">
+        <omgdi:waypoint x="71.99660595085598" y="55.319076722358645"></omgdi:waypoint>
+        <omgdi:waypoint x="122.0" y="56.38297872340426"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow2" id="BPMNEdge_flow2">
+        <omgdi:waypoint x="227.0" y="57.5"></omgdi:waypoint>
+        <omgdi:waypoint x="302.0" y="57.5"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow5" id="BPMNEdge_flow5">
+        <omgdi:waypoint x="354.3372781065089" y="85.0"></omgdi:waypoint>
+        <omgdi:waypoint x="354.11764705882354" y="122.11764705882354"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow6" id="BPMNEdge_flow6">
+        <omgdi:waypoint x="354.1041666666667" y="161.89583333333334"></omgdi:waypoint>
+        <omgdi:waypoint x="354.35602094240835" y="210.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow7" id="BPMNEdge_flow7">
+        <omgdi:waypoint x="334.0" y="142.0"></omgdi:waypoint>
+        <omgdi:waypoint x="174.0" y="142.0"></omgdi:waypoint>
+        <omgdi:waypoint x="174.33727810650888" y="85.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow10" id="BPMNEdge_flow10">
+        <omgdi:waypoint x="499.77272727272725" y="256.77272727272725"></omgdi:waypoint>
+        <omgdi:waypoint x="499.0" y="324.0"></omgdi:waypoint>
+        <omgdi:waypoint x="174.0" y="324.0"></omgdi:waypoint>
+        <omgdi:waypoint x="174.4484052532833" y="85.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow8" id="BPMNEdge_flow8">
+        <omgdi:waypoint x="407.0" y="237.31958762886597"></omgdi:waypoint>
+        <omgdi:waypoint x="480.06849315068496" y="237.06849315068493"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow9" id="BPMNEdge_flow9">
+        <omgdi:waypoint x="519.7727272727273" y="237.22727272727272"></omgdi:waypoint>
+        <omgdi:waypoint x="660.0009247333145" y="238.83909108888867"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

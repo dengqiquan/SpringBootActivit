@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fcore.boot.domain.SysUserRoleDao">
+	<resultMap id="result_SysUserRoleMap" type="com.fcore.boot.entity.SysUserRole">
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+	sysUserId,sysRoleId
+	</sql>
+	
+    <!-- 单条新增  -->
+	<insert id="add" parameterType="com.fcore.boot.entity.SysUserRole">
+		<![CDATA[
+		INSERT INTO sys_user_role(sysUserId,sysRoleId) 
+		VALUES 
+		(#{sysUserId},#{sysRoleId})
+		]]>
+		<selectKey resultType="long" keyProperty="sysUserId">
+			select @@IDENTITY as sysUserId
+		</selectKey>
+    </insert>
+    
+     <!-- 根据id查询 -->
+	<select id="getById" parameterType="long" resultMap="result_SysUserRoleMap">
+		select <include refid="Base_Column_List"/> from sys_user_role where sysUserId=#{sysUserId}
+	</select>
+	
+	<!-- 分页查询列表 -->
+	<select id="getList"  resultMap="result_SysUserRoleMap" parameterType="com.fcore.boot.entity.SysUserRole">
+    	select <include refid="Base_Column_List"/> from sys_user_role
+    	where isDelete = 1
+    	order by sysUserId desc 
+    	<if test="pageSize!=null and pageSize>0 and pageNumber!=null and pageNumber>0">
+    		limit ${(pageNumber-1)*pageSize},#{pageSize}
+    	</if>
+    </select>
+    <select id="getCount" parameterType="com.fcore.boot.entity.SysUserRole" resultType="int">
+   		 select count(1) from sys_user_role
+   		 where isDelete = 1
+    </select>
+
+	
+	<!-- 根据id修改记录 -->
+	<update id="update" parameterType="com.fcore.boot.entity.SysUserRole">
+		update sys_user_role
+		<trim prefix="set" prefixOverrides=",">
+			<if test="sysRoleId != null and sysRoleId >0">
+			,sysRoleId = #{sysRoleId}
+			</if>
+		</trim>
+		where sysUserId=#{sysUserId}
+	</update>
+	
+	<!-- 根据条件查询 -->
+	<select id="getByParams" resultMap="result_SysUserRoleMap" parameterType="java.util.Map">
+		select <include refid="Base_Column_List"/> from sys_user_role
+		<where>
+			<if test="sysUserId != null and sysUserId != '' ">
+		      and sysUserId=#{sysUserId}
+	        </if>
+			<if test="sysRoleId != null and sysRoleId != '' ">
+		      and sysRoleId=#{sysRoleId}
+	        </if>
+		</where>
+	</select>
+</mapper>

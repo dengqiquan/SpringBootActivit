@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.fcore.boot.domain.SysUserDao">
+
+    <!-- 所有列 -->
+    <sql id="Base_Column_List">
+        id,userName,loginName,mobile,salt,password,lastLoginIp,lastLoginTime,createUserId,createTime,updateUserId,updateTime,isDelete
+    </sql>
+
+    <resultMap id="result_SysUserMap" type="com.fcore.boot.entity.SysUser" >
+    	
+    </resultMap>
+    
+   <insert id="add" parameterType="com.fcore.boot.entity.SysUser">
+		<![CDATA[
+		INSERT INTO sys_user(userName,loginName,mobile,salt,password,lastLoginIp,lastLoginTime,createUserId,createTime,updateUserId,updateTime,isDelete) 
+		VALUES 
+		(#{userName},#{loginName},#{mobile},#{salt},#{password},#{lastLoginIp},#{lastLoginTime},#{createUserId},#{createTime},#{updateUserId},#{updateTime},#{isDelete})
+		]]>
+		<selectKey resultType="long" keyProperty="id">
+			select @@IDENTITY as id
+		</selectKey>
+    </insert>
+    
+    <!-- 根据id查询 -->
+	<select id="getById" parameterType="long" resultMap="result_SysUserMap">
+		select <include refid="Base_Column_List"/> from sys_user where id = #{id}
+	</select>
+	
+		<!-- 分页查询列表 -->
+	<select id="getList"  resultMap="result_SysUserMap" parameterType="com.fcore.boot.entity.SysUser">
+    	select <include refid="Base_Column_List"/> from sys_user
+    	where isDelete = 1
+    	<if test="userName != null and userName != '' ">
+	      and userName like CONCAT('%',#{userName},'%') 
+        </if>
+		<if test="loginName != null and loginName != '' ">
+	      and loginName like CONCAT('%',#{loginName},'%')   
+        </if>
+    	order by id desc 
+    	<if test="pageSize!=null and pageSize>0 and pageNumber!=null and pageNumber>0">
+    		limit ${(pageNumber-1)*pageSize},#{pageSize}
+    	</if>
+    </select>
+    <select id="getCount" parameterType="com.fcore.boot.entity.SysUser" resultType="int">
+   		select count(1) from sys_user
+   		where isDelete = 1
+    	<if test="userName != null and userName != '' ">
+	      and userName like CONCAT('%',#{userName},'%') 
+        </if>
+		<if test="loginName != null and loginName != '' ">
+	      and loginName like CONCAT('%',#{loginName},'%')   
+        </if>
+    </select>
+    
+    <!-- 根据id修改记录 -->
+	<update id="update" parameterType="com.fcore.boot.entity.SysUser">
+		update sys_user
+		<trim prefix="set" prefixOverrides=",">
+			<if test="userName != null and userName != ''">
+			,userName = #{userName}
+			</if>
+			<if test="loginName != null and loginName != ''">
+			,loginName = #{loginName}
+			</if>
+			<if test="password != null and password != ''">
+			,password = #{password}
+			</if>
+			<if test="lastLoginIp != null and lastLoginIp != ''">
+			,lastLoginIp = #{lastLoginIp}
+			</if>
+			<if test="lastLoginTime != null and lastLoginTime != ''">
+			,lastLoginTime = #{lastLoginTime}
+			</if>
+			<if test="createUserId != null and createUserId >0">
+			,createUserId = #{createUserId}
+			</if>
+			<if test="createTime != null and createTime != ''">
+			,createTime = #{createTime}
+			</if>
+			<if test="updateUserId != null and updateUserId >0">
+			,updateUserId = #{updateUserId}
+			</if>
+			<if test="updateTime != null and updateTime != ''">
+			,updateTime = #{updateTime}
+			</if>
+			<if test="isDelete != null ">
+			,isDelete = #{isDelete}
+			</if>
+			<if test="mobile != null and mobile != '' ">
+			,mobile = #{mobile}
+			</if>
+		</trim>
+		where id=#{id}
+	</update>
+	
+	<!-- 根据条件查询 -->
+	<select id="getByParams" resultMap="result_SysUserMap" parameterType="java.util.Map">
+		select <include refid="Base_Column_List"/> from sys_user
+		where isDelete = 1
+    	<if test="userName != null and userName != '' ">
+	      and userName = #{userName} 
+        </if>
+		<if test="loginName != null and loginName != '' ">
+	      and loginName = #{loginName}  
+        </if>
+	</select>
+</mapper>
